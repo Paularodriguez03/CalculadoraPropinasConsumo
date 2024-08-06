@@ -1,3 +1,6 @@
+import { Dispatch } from "react";
+import { OrderActions } from "../reducer/order-reducer";
+
 const tipOptions = [
   {
     id: 'tip-10',
@@ -18,12 +21,13 @@ const tipOptions = [
 
 type TipPersentageFormProps = {
   tip: number,
-  setTip: React.Dispatch<React.SetStateAction<number>>
+  dispatch: Dispatch<OrderActions>,
+
 }
 
-export const TipPersentageForm = ({tip, setTip}: TipPersentageFormProps) => {
+export const TipPersentageForm = ({ tip, dispatch }: TipPersentageFormProps) => {
 
-  
+
 
   return (
     <div>
@@ -39,7 +43,7 @@ export const TipPersentageForm = ({tip, setTip}: TipPersentageFormProps) => {
                 id={option.id}
                 value={option.value}
                 className="w-4 h-4"
-                onChange={(e) => setTip(+e.target.value)}
+                onChange={(e) => dispatch({ type: "set-tip", payload: { tip: +e.target.value } })}
                 checked={option.value === tip}
               />
               <label htmlFor={option.id} className="ml-2">{option.label}</label>
